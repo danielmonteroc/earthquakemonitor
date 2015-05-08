@@ -19,6 +19,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.Date;
+
 public class DetailsActivity extends ActionBarActivity {
 
     UsgsFeature mUsgsFeature;
@@ -33,7 +35,6 @@ public class DetailsActivity extends ActionBarActivity {
         setupData();
     }
 
-
     private void setupData()
     {
         TextView textViewPlaceName = (TextView)findViewById(R.id.textViewPlaceName);
@@ -43,7 +44,7 @@ public class DetailsActivity extends ActionBarActivity {
 
         textViewPlaceName.setText(mUsgsFeature.getPlace());
         textViewMagnitude.setText("Magnitude: "+mUsgsFeature.getMag());
-        textViewTimeAndDate.setText("Time: "+mUsgsFeature.getTime());
+        textViewTimeAndDate.setText("Time: "+new Date(mUsgsFeature.getTime()).toString());
         textViewLocation.setText("Location: "+mUsgsFeature.getCoordinates().toString() + "\nDepth:" + mUsgsFeature.getDepth());
 
 
