@@ -15,7 +15,11 @@ package com.android.danielmontero.earthquakemonitor.adapters;
         import com.android.danielmontero.earthquakemonitor.R;
         import com.android.danielmontero.earthquakemonitor.objects.UsgsFeature;
 
+        import java.text.DateFormat;
+        import java.text.SimpleDateFormat;
         import java.util.ArrayList;
+        import java.util.Date;
+        import java.util.TimeZone;
 
 
 public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.SummaryViewHolder> {
@@ -67,14 +71,33 @@ public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.SummaryV
     }
 
 
+    private String localTime(long time)
+    {
+        Date localTime = new Date(time);
+        String format = "yyyy/MM/dd HH:mm:ss";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
+
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date gmtTime = new Date(simpleDateFormat.format(localTime));
+
+        Date fromGmt = new Date(gmtTime.getTime() + TimeZone.getDefault().getOffset(localTime.getTime()));
+        return fromGmt.toString();
+    }
     @Override
     public void onBindViewHolder(SummaryViewHolder holder, int position) {
         //SET INFORMATION FROM mList to the view
 
         UsgsFeature usgsFeature = mList.get(position);
         holder.mTitle.setText(usgsFeature.getPlace());
-        setColors(holder,usgsFeature.getMag());
-        holder.mDescription.setText("Magnitude: "+usgsFeature.getMag());
+        setColors(holder, usgsFeature.getMag());
+        StringBuilder description = new StringBuilder();
+        description.append(localTime(usgsFeature.getTime()) );
+        description.append("\n");
+        description.append("Magnitude: ");
+        description.append(usgsFeature.getMag());
+
+
+        holder.mDescription.setText(description);
 
     }
 
