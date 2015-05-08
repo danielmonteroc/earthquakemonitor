@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">EarthQuakeMonitor</string>
+    <string name="app_name">Earth Quake Monitor</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_details">DetailsActivity</string>
+    <string name="title_activity_details">Details</string>
 
     <string name="google_maps_key">AIzaSyCPJwFtPDbN_inbnWav8-sbemuVpdZsiqY</string>
 </resources>
