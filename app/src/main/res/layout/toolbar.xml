@@ -5,4 +5,16 @@
     android:id="@+id/toolbar_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary"/>
+    android:background="@color/primary">
+
+
+    <ImageButton
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/imageButtonRefresh"
+        android:layout_gravity="right"
+        android:src="@android:drawable/stat_notify_sync"
+        android:background="@color/primary"
+        android:clickable="false"
+        android:nestedScrollingEnabled="false" />
+</android.support.v7.widget.Toolbar>

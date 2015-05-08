@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 
 import com.android.danielmontero.earthquakemonitor.R;
@@ -18,7 +19,7 @@ import com.android.danielmontero.earthquakemonitor.request.RequestResponse;
 import java.util.ArrayList;
 
 
-public class SummaryActivity extends ActionBarActivity implements RequestCallback<UsgsFeature>,SwipeRefreshLayout.OnRefreshListener{
+public class SummaryActivity extends ActionBarActivity implements RequestCallback<UsgsFeature>,SwipeRefreshLayout.OnRefreshListener, View.OnClickListener{
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
@@ -39,6 +40,7 @@ public class SummaryActivity extends ActionBarActivity implements RequestCallbac
         mRecyclerView.setAdapter(mAdapter);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         mSwipeRefreshLayout.setOnRefreshListener(this);
+        findViewById(R.id.imageButtonRefresh).setOnClickListener(this);
 
         RequestManager.GET_SUMMARY.onBackground(this);
 
@@ -77,5 +79,10 @@ public class SummaryActivity extends ActionBarActivity implements RequestCallbac
     @Override
     public void onRefresh() {
         RequestManager.GET_SUMMARY.onBackground(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        onRefresh();
     }
 }
