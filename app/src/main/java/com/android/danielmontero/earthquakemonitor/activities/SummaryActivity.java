@@ -1,5 +1,6 @@
 package com.android.danielmontero.earthquakemonitor.activities;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,11 +18,12 @@ import com.android.danielmontero.earthquakemonitor.request.RequestResponse;
 import java.util.ArrayList;
 
 
-public class SummaryActivity extends ActionBarActivity implements RequestCallback<UsgsFeature>{
+public class SummaryActivity extends ActionBarActivity implements RequestCallback<UsgsFeature>,SwipeRefreshLayout.OnRefreshListener{
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     SummaryAdapter mAdapter;
+    SwipeRefreshLayout mSwipeRefreshLayout;
     ArrayList<UsgsFeature> mList;
 
     @Override
@@ -35,7 +37,8 @@ public class SummaryActivity extends ActionBarActivity implements RequestCallbac
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new SummaryAdapter(mList,this);
         mRecyclerView.setAdapter(mAdapter);
-
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
 
         RequestManager.GET_SUMMARY.onBackground(this);
 
@@ -52,11 +55,13 @@ public class SummaryActivity extends ActionBarActivity implements RequestCallbac
 
     @Override
     public void onRequestBegin() {
+        mSwipeRefreshLayout.setRefreshing(true);
 
     }
 
     @Override
     public void onRequestFinished(RequestResponse<UsgsFeature> requestResponse) {
+        mSwipeRefreshLayout.setRefreshing(false);
        if(requestResponse.isSucessfull()) {
 
            mList.clear();
@@ -67,5 +72,10 @@ public class SummaryActivity extends ActionBarActivity implements RequestCallbac
         {
 
         }
+    }
+
+    @Override
+    public void onRefresh() {
+        RequestManager.GET_SUMMARY.onBackground(this);
     }
 }
