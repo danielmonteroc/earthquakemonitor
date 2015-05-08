@@ -5,8 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.TextView;
+
 
 import com.android.danielmontero.earthquakemonitor.R;
 import com.android.danielmontero.earthquakemonitor.adapters.SummaryAdapter;
@@ -34,7 +33,7 @@ public class SummaryActivity extends ActionBarActivity implements RequestCallbac
         mRecyclerView = (RecyclerView)findViewById(R.id.recycler_summary);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new SummaryAdapter(mList);
+        mAdapter = new SummaryAdapter(mList,this);
         mRecyclerView.setAdapter(mAdapter);
 
 
@@ -47,6 +46,7 @@ public class SummaryActivity extends ActionBarActivity implements RequestCallbac
     {
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_activity);
         toolbar.setTitle("Earthquake Monitor");
+        toolbar.setTitleTextColor(getResources().getColor(R.color.primary_light));
         setSupportActionBar(toolbar);
     }
 

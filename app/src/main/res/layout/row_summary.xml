@@ -10,48 +10,45 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/imageViewFeed"
-            android:layout_width="100dp"
-            android:layout_height="150dp"
-            android:scaleType="centerCrop" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:text="Large Text"
             android:id="@+id/textViewFeedTitle"
-            android:layout_toRightOf="@+id/imageViewFeed"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="10dp" />
+            android:layout_toRightOf="@+id/imageButton"
+            android:layout_toEndOf="@+id/imageButton"
+            android:layout_margin="3dp" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Small Text"
             android:id="@+id/textViewFeedDesc"
             android:layout_below="@+id/textViewFeedTitle"
-            android:layout_alignLeft="@+id/textViewFeedTitle" />
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="8dp" />
         <View
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="#ffd5d5d5"
+            android:background="@color/primary_dark"
             android:id="@+id/linea"
-            android:layout_above="@+id/compartir"
-            android:layout_toRightOf="@+id/imageViewFeed">
+            android:layout_alignParentBottom="true"
+        >
 
         </View>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/compartir"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:src="@android:drawable/ic_menu_share"
-            android:background="@color/material_blue_grey_800" />
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/imageButton"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_margin="3dp" />
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

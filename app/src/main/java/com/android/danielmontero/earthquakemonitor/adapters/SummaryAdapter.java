@@ -9,7 +9,7 @@ package com.android.danielmontero.earthquakemonitor.adapters;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
-        import android.widget.ImageView;
+        import android.widget.ImageButton;
         import android.widget.TextView;
 
         import com.android.danielmontero.earthquakemonitor.R;
@@ -21,27 +21,50 @@ package com.android.danielmontero.earthquakemonitor.adapters;
 public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.SummaryViewHolder> {
 
     private ArrayList<UsgsFeature> mList;
-    private Context mContext;
+    private  Context mContext;
+
     public static class SummaryViewHolder extends RecyclerView.ViewHolder {
-        public ImageView mImageView;
+
         public TextView mTitle;
         public TextView mDescription;
+        public ImageButton mImageButton;
         SummaryViewHolder(View v)
         {
             super(v);
-            mImageView = (ImageView)v.findViewById(R.id.imageViewFeed);
             mTitle = (TextView) v.findViewById(R.id.textViewFeedTitle);
             mDescription =(TextView) v.findViewById(R.id.textViewFeedDesc);
+            mImageButton = (ImageButton)v.findViewById(R.id.imageButton);
         }
     }
-    public SummaryAdapter(ArrayList<UsgsFeature> list)
+    public SummaryAdapter(ArrayList<UsgsFeature> list, Context context)
     {
         mList = list;
+        mContext = context;
 
     }
 
 
 
+    private void setColors(SummaryViewHolder holder,double mag)
+    {
+        int background=0;
+        if(mag<=0.9)
+        {
+            background = mContext.getResources().getColor(R.color.green_no_that_bad);
+
+        }
+        else if(mag>9)
+        {
+            background = mContext.getResources().getColor(R.color.red_dangerous);
+
+        }
+        else
+        {
+            background = mContext.getResources().getColor(R.color.yellow_submarine);
+
+        }
+        holder.mImageButton.setBackgroundColor(background);
+    }
 
 
     @Override
@@ -50,6 +73,9 @@ public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.SummaryV
 
         UsgsFeature usgsFeature = mList.get(position);
         holder.mTitle.setText(usgsFeature.getPlace());
+        setColors(holder,usgsFeature.getMag());
+        holder.mDescription.setText("Magnitude: "+usgsFeature.getMag());
+
     }
 
     @Override
