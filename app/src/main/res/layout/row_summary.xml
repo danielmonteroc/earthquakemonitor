@@ -1,7 +1,7 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="wrap_content"
     card_view:cardCornerRadius="4dp"
     card_view:cardElevation="4dp"
     card_view:cardUseCompatPadding="true">
@@ -16,10 +16,10 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:text="Large Text"
             android:id="@+id/textViewFeedTitle"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/imageButton"
-            android:layout_toEndOf="@+id/imageButton"
-            android:layout_margin="3dp" />
+            android:layout_alignTop="@+id/imageViewColored"
+            android:layout_toRightOf="@+id/imageViewColored"
+            android:layout_toEndOf="@+id/imageViewColored"
+            android:layout_margin="4dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -35,20 +35,21 @@
             android:layout_width="wrap_content"
             android:layout_height="1dp"
             android:background="@color/primary_dark"
-            android:id="@+id/linea"
+            android:id="@+id/line_separator"
             android:layout_alignParentBottom="true"
         >
 
         </View>
 
-        <ImageButton
+        <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:id="@+id/imageButton"
+            android:id="@+id/imageViewColored"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_margin="3dp" />
+            android:layout_margin="3dp"
+            android:background="@color/red_dangerous" />
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>
