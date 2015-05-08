@@ -3,16 +3,17 @@ package com.android.danielmontero.earthquakemonitor.activities;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.TextView;
 
 import com.android.danielmontero.earthquakemonitor.R;
+import com.android.danielmontero.earthquakemonitor.objects.UsgsFeature;
 import com.android.danielmontero.earthquakemonitor.request.RequestCallback;
 import com.android.danielmontero.earthquakemonitor.request.RequestManager;
 import com.android.danielmontero.earthquakemonitor.request.RequestResponse;
 
 
-public class SummaryActivity extends ActionBarActivity implements RequestCallback{
+
+public class SummaryActivity extends ActionBarActivity implements RequestCallback<UsgsFeature>{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,6 @@ public class SummaryActivity extends ActionBarActivity implements RequestCallbac
 
     private void setupToolbar()
     {
-        View toolbarView = findViewById(R.id.toolbar_activity);
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_activity);
         toolbar.setTitle("Earthquake Monitor");
         setSupportActionBar(toolbar);
@@ -38,10 +38,18 @@ public class SummaryActivity extends ActionBarActivity implements RequestCallbac
     }
 
     @Override
-    public void onRequestFinished(RequestResponse requestResponse) {
+    public void onRequestFinished(RequestResponse<UsgsFeature> requestResponse) {
         TextView textView = (TextView)findViewById(R.id.textView);
+        StringBuilder stringBuilder = new StringBuilder();
         if(requestResponse.isSucessfull()) {
-            textView.setText(requestResponse.stringResponse);
+
+            for(UsgsFeature usgsFeature:requestResponse.arrayList)
+            {
+                stringBuilder.append(usgsFeature.getPlace());
+                stringBuilder.append("\n");
+
+            }
+            textView.setText(stringBuilder);
 
         }
         else
